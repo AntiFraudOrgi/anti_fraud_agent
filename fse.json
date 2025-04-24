@@ -1,20 +1,20 @@
 [
     {
-      "fve_id": "FVE-RENT-001",
+      "fse_id": "FVE-RENT-001",
       "title": "假房東收取大額訂金",
       "description": "詐騙者冒充屋主或仲介，以低於市場行情出租，要求先匯高額訂金後失聯。",
       "baseline_score": 0.65,
       "calc_rules": "risk = baseline + 0.2*(amount>50000) + 0.1*(not has_title_deed)"
     },
     {
-      "fve_id": "FVE-SALE-002",
+      "fse_id": "FVE-SALE-002",
       "title": "偽造房屋權狀出售",
       "description": "利用偽造的房屋權狀、印章欺騙買家簽約並收取頭期款。",
       "baseline_score": 0.7,
       "calc_rules": "risk = baseline + 0.15*(amount>1000000) + 0.1*(not has_title_deed)"
     },
     {
-      "fve_id": "FVE-LOAN-003",
+      "fse_id": "FVE-LOAN-003",
       "title": "貸款代辦先收手續費後失聯",
       "description": "自稱可協助取得高成數房貸，要求先支付手續費或保證金，款項到手後即消失。",
       "baseline_score": 0.6,

@@ -1,1 +1,5 @@
 rock
+__pycache__
+agents/test.py
+agents/test2.py
+agents/schemas.py
