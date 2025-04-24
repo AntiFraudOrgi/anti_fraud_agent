@@ -2,7 +2,6 @@
 """RuleEngineAgent: 依 calc_rules 公式計算風險分"""
 
 import math
-from typing import Dict, Any
 from asteval import Interpreter  # 安全的 eval 替代
 
 _SAFE_NAMES = {"sqrt": math.sqrt, "abs": abs, "min": min, "max": max}
@@ -14,7 +13,7 @@ class RuleEngineAgent:
     def __init__(self):
         self._aeval = Interpreter(usersyms=_SAFE_NAMES, err_writer=None)
 
-    def score(self, user_info: Dict[str, Any], calc_rule: str, baseline: float) -> float:
+    def score(self, user_info: dict[str], calc_rule: str, baseline: float) -> float:
         """
         Args
         ----

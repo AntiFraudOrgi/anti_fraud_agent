@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """EmbeddingAgent: 文字 → 向量"""
-from typing import List
 import numpy as np
 from langchain_openai import OpenAIEmbeddings
 import os 
@@ -13,7 +12,7 @@ class EmbeddingAgent:
     def __init__(self, model_name: str = "text-embedding-3-small"):
         self.embedder = OpenAIEmbeddings(model=model_name)
 
-    def embed(self, texts: List[str]) -> np.ndarray:
+    def embed(self, texts: list[str]) -> np.ndarray:
         """
         回傳 shape=(len(texts), dim) 的 numpy 陣列。
         LangChain 的 OpenAIEmbeddings 回傳的是 list[list[float]]。
