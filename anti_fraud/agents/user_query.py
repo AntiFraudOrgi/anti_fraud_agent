@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 """把使用者送來的 JSON 做最基本欄位正規化"""
-
 
 class UserQueryService:
     @staticmethod

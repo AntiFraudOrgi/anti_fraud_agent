@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <script>
+      (function() {
+        const originalConsole = window.console;
+        window.console = {
+          log: (...args) => {
+            originalConsole.log(...args);
+            window.parent.postMessage({ type: 'console', message: args.join(' ') }, '*');
+          },
+          error: (...args) => {
+            originalConsole.error(...args);
+            window.parent.postMessage({ type: 'console', message: 'Error: ' + args.join(' ') }, '*');
+          },
+          warn: (...args) => {
+            originalConsole.warn(...args);
+            window.parent.postMessage({ type: 'console', message: 'Warning: ' + args.join(' ') }, '*');
+          }
+        };
+
+        window.addEventListener('error', (event) => {
+          window.parent.postMessage({ type: 'console', message: 'Uncaught Error: ' + event.message }, '*');
+        });
+      })();
+    </script>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房產詐騙防範知識庫</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #e74c3c;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .intro {
+            margin-bottom: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .scam-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .scam-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+            max-width: 350px;
+        }
+        
+        .scam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            position: relative;
+        }
+        
+        .scam-id {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .warning-signs {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .prevention-tips {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .action-steps {
+            background-color: #cce5ff;
+            border-left: 4px solid #007bff;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        ul {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+        
+        .resources {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .resource-link:hover {
+            background-color: #2980b9;
+        }
+        
+        .disclaimer {
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            padding: 1rem;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .scam-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .scam-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>房產詐騙防範知識庫</h1>
+            <p class="subtitle">提高警覺，保護您的財產安全</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="intro">
+            <h2>關於房產詐騙</h2>
+            <p>房產交易涉及大額資金流動，常成為詐騙份子鎖定的目標。了解常見的詐騙手法，能幫助您在購屋、租屋或貸款過程中提高警覺，避免財產損失。本知識庫收集了常見的房產詐騙手法，提供警示跡象和防範措施，協助您保護自身權益。</p>
+        </div>
+        
+        <div class="scam-cards">
+            <!-- 詐騙腳本 1 -->
+            <div class="scam-card">
+                <div class="card-header">
+                    <h2>假房東收取大額訂金</h2>
+                    <span class="scam-id">FVE-RENT-001</span>
+                </div>
+                <div class="card-body">
+                    <p>詐騙者冒充屋主或仲介，以低於市場行情出租，要求先匯高額訂金後失聯。</p>
+                    
+                    <div class="warning-signs">
+                        <h3>警示跡象</h3>
+                        <ul>
+                            <li>租金明顯低於市場行情</li>
+                            <li>無法實地看屋或僅提供有限的照片</li>
+                            <li>急著要求匯款或轉帳</li>
+                            <li>溝通僅透過網路，拒絕面對面交談</li>
+                            <li>要求使用非正規支付管道</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="prevention-tips">
+                        <h3>防範措施</h3>
+                        <ul>
+                            <li>堅持實地看屋並確認房東身份</li>
+                            <li>查證房屋所有權資訊</li>
+                            <li>簽約前先詳閱租約內容</li>
+                            <li>避免支付過高訂金（一般不超過一個月租金）</li>
+                            <li>付款前確認房東身分證件</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-steps">
+                        <h3>如遇詐騙</h3>
+                        <ul>
+                            <li>立即報警並向 165 反詐騙專線求助</li>
+                            <li>保留所有通訊紀錄和匯款證明</li>
+                            <li>向消費者保護團體投訴</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 詐騙腳本 2 -->
+            <div class="scam-card">
+                <div class="card-header">
+                    <h2>偽造房屋權狀出售</h2>
+                    <span class="scam-id">FVE-SALE-002</span>
+                </div>
+                <div class="card-body">
+                    <p>利用偽造的房屋權狀、印章欺騙買家簽約並收取頭期款。</p>
+                    
+                    <div class="warning-signs">
+                        <h3>警示跡象</h3>
+                        <ul>
+                            <li>售價明顯低於市場行情</li>
+                            <li>賣方急於完成交易</li>
+                            <li>不願提供完整產權資料或所有權人資訊</li>
+                            <li>要求在非專業場所簽約</li>
+                            <li>不經由地政士或律師辦理過戶</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="prevention-tips">
+                        <h3>防範措施</h3>
+                        <ul>
+                            <li>委託專業地政士查詢房屋產權資料</li>
+                            <li>親自前往地政事務所查閱登記資料</li>
+                            <li>確認賣方身份與所有權證明</li>
+                            <li>透過銀行或專業第三方進行金流</li>
+                            <li>委託專業人士協助交易過程</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-steps">
+                        <h3>如遇詐騙</h3>
+                        <ul>
+                            <li>立即報警並保存所有相關文件</li>
+                            <li>向法院聲請假處分保全證據</li>
+                            <li>委託律師提起訴訟追回款項</li>
+                            <li>向地方政府消保官投訴</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 詐騙腳本 3 -->
+            <div class="scam-card">
+                <div class="card-header">
+                    <h2>貸款代辦先收手續費後失聯</h2>
+                    <span class="scam-id">FVE-LOAN-003</span>
+                </div>
+                <div class="card-body">
+                    <p>自稱可協助取得高成數房貸，要求先支付手續費或保證金，款項到手後即消失。</p>
+                    
+                    <div class="warning-signs">
+                        <h3>警示跡象</h3>
+                        <ul>
+                            <li>承諾能辦理銀行不受理的高風險貸款</li>
+                            <li>要求先繳交手續費或保證金</li>
+                            <li>無合法登記的營業地址</li>
+                            <li>無專業執照或證明文件</li>
+                            <li>過度承諾快速審核或保證核貸</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="prevention-tips">
+                        <h3>防範措施</h3>
+                        <ul>
+                            <li>直接向銀行或合法金融機構申請貸款</li>
+                            <li>查詢業者合法登記資訊</li>
+                            <li>詢問多家業者比較條件</li>
+                            <li>拒絕支付前期費用</li>
+                            <li>仔細閱讀合約並確認各項收費明細</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-steps">
+                        <h3>如遇詐騙</h3>
+                        <ul>
+                            <li>立即向金融監督管理委員會檢舉</li>
+                            <li>向警方報案並保留所有證據</li>
+                            <li>向消費者保護官投訴</li>
+                            <li>在社群媒體分享經驗提醒他人</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resources">
+            <h2>實用資源與檢舉管道</h2>
+            <p>如果您懷疑自己遇到房產詐騙，可以透過以下管道尋求協助或檢舉：</p>
+            
+            <div class="resource-links">
+                <a href="#" class="resource-link">165 反詐騙專線</a>
+                <a href="#" class="resource-link">消費者保護專線 1950</a>
+                <a href="#" class="resource-link">金融監督管理委員會</a>
+                <a href="#" class="resource-link">地政事務所</a>
+                <a href="#" class="resource-link">不動產資訊平台</a>
+            </div>
+        </div>
+        
+        <div class="disclaimer">
+            <p><strong>免責聲明：</strong>本知識庫提供的資訊僅供參考，不能取代專業法律或財務建議。在進行任何房產交易前，建議諮詢專業人士意見。若遇詐騙情況，請立即向相關單位報案。</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>房產詐騙防範知識庫 © 2025 版權所有</p>
+            <p>最後更新日期：2025年4月27日</p>
+        </div>
+    </footer>
+    
+    <!-- <script>
+        // 簡單的互動功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const scamCards = document.querySelectorAll('.scam-card');
+            
+            scamCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // 移除所有卡片的活躍狀態
+                    scamCards.forEach(c => c.style.transform = 'translateY(0)');
+                    
+                    // 設置當前卡片的活躍狀態
+                    this.style.transform = 'translateY(-10px)';
+                });
+            });
+        });
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,66 @@
+/* Additional professional styles */
+
+/* Add subtle animations */
+.btn-primary, .btn-secondary {
+  @apply transition duration-200;
+}
+
+/* Card hover effect */
+.card {
+  @apply transition duration-300;
+}
+.card:hover {
+  @apply shadow-md transform translate-y-[-2px];
+}
+
+/* Add fancy gradient for risk progress bar */
+.risk-progress-low {
+  background: linear-gradient(90deg, #10B981, #34D399);
+}
+.risk-progress-medium {
+  background: linear-gradient(90deg, #F59E0B, #FBBF24);
+}
+.risk-progress-high {
+  background: linear-gradient(90deg, #EF4444, #F87171);
+}
+
+/* Pulse animation for loading indicator */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.animate-pulse {
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Testimonial card */
+.testimonial-card {
+  @apply bg-white border border-slate-200 rounded-lg p-5 shadow-sm relative overflow-hidden;
+}
+.testimonial-card::before {
+  content: '"';
+  @apply absolute top-0 left-4 text-6xl text-indigo-100 font-serif;
+}
+
+/* Fancy badge for features */
+.feature-badge {
+  @apply inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 mb-4;
+}
+
+/* Wave decoration */
+.wave-decoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+.wave-decoration svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 62px;
+}
+.wave-decoration .shape-fill {
+  fill: #FFFFFF;
+}

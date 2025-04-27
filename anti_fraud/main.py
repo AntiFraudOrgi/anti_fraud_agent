@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from agents.user_query import UserQueryService
 from agents.script_registry import ScriptRegistry
 from agents.embedding import EmbeddingAgent
@@ -48,5 +46,4 @@ def ask_loop():
 
 # ---------- 程式進入點 ----------
 if __name__ == "__main__":
-    # 預設直接跑 CLI；若想改跑 uvicorn，註解下一行再加上 uvicorn.run(...)
     ask_loop()
