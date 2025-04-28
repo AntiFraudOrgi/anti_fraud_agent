@@ -6,7 +6,7 @@ from agents.fusion_score import FusionScoringAgent
 
 
 # -------- 系統初始化 --------
-DATA_PATH = "fse.json"
+DATA_PATH = "anti_fraud/fse.json"
 
 embedder = EmbeddingAgent()
 registry = ScriptRegistry(DATA_PATH, embedder)
