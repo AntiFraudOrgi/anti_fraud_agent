@@ -1,17 +1,48 @@
+<!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>專業不動產諮詢服務 | AntiFraud AI</title>
-
   <!-- Tailwind CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <!-- Fonts & Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  
+  <!-- 主題樣式（深藍＋棕色）- 改善文字間距 -->
   <style>
+    :root {
+      --primary: #1E3A8A;
+      --primary-dark: #172554;
+      --primary-light: #3B82F6;
+      --primary-lighter: #60A5FA;
+      --primary-lightest: #BFDBFE;
+      --secondary: #92400E;
+      --secondary-dark: #78350F;
+      --secondary-light: #D97706;
+      --secondary-lighter: #F59E0B;
+      --secondary-lightest: #FDE68A;
+      --success: #065F46;
+      --warning: #92400E;
+      --danger: #991B1B;
+      --dark: #111827;
+      --light: #F3F4F6;
+      --gray-dark: #1F2937;
+      --gray: #374151;
+      --gray-light: #6B7280;
+      --gray-lighter: #9CA3AF;
+      --gray-lightest: #D1D5DB;
+    }
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7; /* 增加行高 */
+      letter-spacing: 0.02em; /* 增加字距 */
+    }
+    p {
+      margin-bottom: 1rem; /* 段落底部間距 */
+    }
     .card {
       padding: 2rem;
       border-radius: 0.75rem;
@@ -19,127 +50,130 @@
       box-shadow: 0 6px 10px -2px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.05);
       transition: all 0.3s ease;
     }
-    .card h2, .card h3, .card p, .card ul, .card form {
+    /* 增加卡片內容間距 */
+    .card > h2, .card > h3, .card > h4 {
+      margin-bottom: 1.25rem;
+    }
+    .card > p {
       margin-bottom: 1.5rem;
     }
-    input[type="text"],
-    input[type="number"],
-    textarea,
-    select {
-      padding: 0.75rem 1rem;
+    .btn-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      font-weight: 600;
+      border-radius: 0.375rem;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 2px 6px rgba(30, 58, 138, 0.4);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.02);
     }
     .example-scenario {
       transition: all 0.2s ease;
     }
     .example-scenario:hover {
-      background-color: var(--primary-lightest, #eef2ff);
-      border-color: var(--primary, #4f46e5);
+      background-color: var(--primary-lightest);
+      border-color: var(--primary);
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
     }
-    .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+    .text-slate-600,
+    .text-slate-700,
+    .text-slate-800 {
+      color: var(--gray) !important;
     }
-    footer .container, section.bg-indigo-600 .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+    .bg-indigo-50 {
+      background-color: var(--primary-lightest) !important;
+    }
+    footer {
+      background-color: var(--dark);
+      color: var(--gray-lightest);
+    }
+    footer a {
+      color: var(--primary-lighter);
+    }
+    footer a:hover {
+      color: white;
+    }
+    /* 調整列表項目間距 */
+    ul.space-y-2 {
+      margin-top: 0.75rem;
+    }
+    ul.space-y-2 li {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    /* 改善表單間距 */
+    #consultForm .grid.gap-6 > div {
+      margin-bottom: 0.5rem;
+    }
+    /* 增加標題與內容間的間距 */
+    label.block.font-medium {
+      margin-bottom: 0.75rem;
+    }
+    /* 調整手機版文字大小和間距 */
+    @media (max-width: 640px) {
+      body {
+        line-height: 1.6;
+      }
+      .card {
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 1.75rem !important;
+      }
+      h2 {
+        font-size: 1.5rem !important;
+      }
+      h3 {
+        font-size: 1.25rem !important;
+      }
+      /* 增強文字可讀性 */
+      textarea, input, select {
+        font-size: 1rem !important;
+        letter-spacing: 0.03em;
+      }
+      .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      /* 增加頁面元素間的垂直間距 */
+      section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
     }
   </style>
-
-  <!-- Main Script -->
-  <script type="module" defer>
-    import { queryFraud } from "./js/api-service.js";
-    import { renderResults } from "./js/ui.js";
-
-    document.getElementById("consultForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const payload = {
-        description: document.getElementById("desc").value.trim(),
-        amount: Number(document.getElementById("amount").value || 0),
-        role: document.getElementById("role").value,
-        has_title_deed: document.querySelector("[name=deed]:checked")?.value === "yes"
-      };
-      if (!payload.description) {
-        showValidationError("desc", "請填寫情境描述");
-        return;
-      }
-      const resultsSection = document.getElementById("results");
-      const loadingIndicator = document.getElementById("loading");
-      resultsSection.innerHTML = "";
-      loadingIndicator.classList.remove("hidden");
-      try {
-        const data = await queryFraud(payload, 5);
-        renderResults(data, resultsSection);
-      } catch(err) {
-        resultsSection.innerHTML = `<div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded">
-          <div class="flex items-center">
-            <i class="fa-solid fa-circle-exclamation text-rose-500 mr-3"></i>
-            <p class="text-rose-700">API 連線錯誤，請稍後再試。</p>
-          </div>
-        </div>`;
-      } finally {
-        loadingIndicator.classList.add("hidden");
-        document.getElementById("resultWrapper").scrollIntoView({ behavior: "smooth" });
-      }
-    });
-
-    function showValidationError(fieldId, message) {
-      const field = document.getElementById(fieldId);
-      const errorElement = document.getElementById(`${fieldId}-error`);
-      field.classList.add("border-rose-500");
-      errorElement.textContent = message;
-      errorElement.classList.remove("hidden");
-      field.focus();
-      field.addEventListener("input", () => {
-        field.classList.remove("border-rose-500");
-        errorElement.classList.add("hidden");
-      }, { once: true });
-    }
-
-    document.getElementById("desc").addEventListener("input", (e) => {
-      const charCount = e.target.value.length;
-      document.getElementById("charCount").textContent = `${charCount} / 500 字`;
-    });
-
-    document.querySelectorAll(".example-scenario").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const descField = document.getElementById("desc");
-        descField.value = btn.getAttribute("data-scenario");
-        descField.dispatchEvent(new Event("input"));
-      });
-    });
-  </script>
 </head>
-
-<body class="bg-slate-50 font-[Inter] text-slate-800">
+<body class="bg-gray-50 text-gray-900 font-[Inter]">
   <!-- ──────────────  Navbar  ────────────── -->
   <header class="navbar sticky top-0 z-40 bg-white/90 backdrop-blur-sm shadow-sm">
     <div class="container flex items-center justify-between py-3">
-      <a href="index.html" class="text-lg font-semibold text-indigo-600 flex items-center gap-2">
-        <div class="bg-indigo-100 w-8 h-8 rounded-full flex items-center justify-center">
+      <a href="index.html" class="text-lg font-semibold text-blue-700 flex items-center gap-2">
+        <div class="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-shield-halved"></i>
         </div>
         AntiFraud AI
       </a>
-      
       <nav class="hidden md:flex items-center gap-8 text-sm">
-        <a href="index.html" class="hover:text-indigo-900 flex items-center gap-1">
+        <a href="index.html" class="hover:text-blue-800 flex items-center gap-1">
           <i class="fa-solid fa-magnifying-glass text-xs"></i>
           <span>快速評估</span>
         </a>
-        <a href="consultation.html" class="text-indigo-600 font-medium flex items-center gap-1">
+        <a href="consultation.html" class="text-blue-700 font-medium flex items-center gap-1">
           <i class="fa-solid fa-user-tie text-xs"></i>
           <span>專業諮詢</span>
         </a>
-        <a href="knowledge.html" class="hover:text-indigo-600 flex items-center gap-1">
+        <a href="knowledge.html" class="hover:text-blue-700 flex items-center gap-1">
           <i class="fa-solid fa-book text-xs"></i>
           <span>詐騙知識庫</span>
         </a>
       </nav>
-      
       <!-- Mobile menu button -->
-      <button class="md:hidden text-slate-700 hover:text-indigo-600">
+      <button class="md:hidden text-gray-700 hover:text-blue-600">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
@@ -149,75 +183,68 @@
   <section class="relative py-16 bg-indigo-50">
     <div class="container">
       <div class="max-w-2xl">
-        <span class="inline-block py-1 px-3 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium mb-4">
+        <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-4">
           <i class="fa-solid fa-user-tie mr-1"></i> 專業諮詢服務
         </span>
-        <h1 class="text-3xl font-bold mb-4">不動產交易詳細風險評估</h1>
-        <p class="text-slate-700 text-lg mb-6">
+        <h1 class="text-3xl font-bold mb-6">不動產交易詳細風險評估</h1>
+        <p class="text-gray-600 text-lg mb-6">
           填寫更多細節，獲得更精準的風險分析與專業建議。我們的 AI 技術結合專家經驗，為您的不動產交易提供全方位保障。
         </p>
       </div>
     </div>
-    
     <!-- 背景裝飾 -->
     <div class="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
       <i class="fa-solid fa-file-contract text-indigo-800 text-[400px] absolute -top-10 -right-10"></i>
     </div>
   </section>
 
-  <!-- ──────────────  Main Content  ────────────── -->
+  <!-- ──────────────  Main Content Start ────────────── -->
   <main class="container py-12">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- 主要表單區塊 -->
+      <!-- 左側：表單 -->
       <div class="lg:col-span-2">
         <div class="card">
-          <h2 class="text-xl font-semibold mb-4">詳細諮詢表單</h2>
-          <p class="text-slate-600 mb-6">請填寫以下資訊，以獲得更精準的風險評估與專業建議</p>
-
-          <form id="consultForm" class="grid gap-6">
-            <!-- 描述區域 -->
+          <h2 class="text-xl font-semibold mb-5">詳細諮詢表單</h2>
+          <p class="text-gray-600 mb-8">請填寫以下資訊，以獲得更精準的風險評估與專業建議</p>
+          <form id="consultForm" class="grid gap-8">
             <div>
-              <label for="desc" class="block font-medium mb-1">
-                情境描述 <span class="text-rose-600">*</span>
+              <label for="desc" class="block font-medium mb-3">
+                情境描述 <span class="text-red-600">*</span>
               </label>
               <textarea 
                 id="desc" 
                 rows="6" 
-                class="w-full border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+                class="w-full border border-gray-lightest rounded-md px-4 py-3 focus:ring-2 focus:ring-blue-600"
                 placeholder="請詳細描述您遇到的情況，包括交易細節、對方的要求、付款方式等..."
                 maxlength="500"
               ></textarea>
-              <div class="flex justify-between items-center mt-1">
-                <p id="desc-error" class="text-sm text-rose-600 hidden"></p>
-                <p id="charCount" class="text-xs text-slate-500">0 / 500 字</p>
+              <div class="flex justify-between items-center mt-2">
+                <p id="desc-error" class="text-sm text-red-600 hidden"></p>
+                <p id="charCount" class="text-xs text-gray-500">0 / 500 字</p>
               </div>
             </div>
-
             <!-- 交易金額 -->
             <div>
-              <label for="amount" class="block font-medium mb-1">
+              <label for="amount" class="block font-medium mb-3">
                 交易金額 (新台幣)
               </label>
-              <div class="relative">
-                <input 
-                  type="number" 
-                  id="amount" 
-                  min="0"
-                  class="w-full border border-slate-300 rounded-md pl-10 pr-3 py-2 focus:ring-2 focus:ring-indigo-500"
-                  placeholder="例如：1200000"
-                >
-              </div>
-              <p class="text-xs text-slate-500 mt-1">請輸入總交易金額，若為租屋請填月租金</p>
+              <input 
+                type="number" 
+                id="amount" 
+                min="0"
+                class="w-full border border-gray-lightest rounded-md px-4 py-3 focus:ring-2 focus:ring-blue-600"
+                placeholder="例如：1200000"
+              >
+              <p class="text-xs text-gray-500 mt-2">請輸入總交易金額，若為租屋請填月租金</p>
             </div>
-
             <!-- 您的角色 -->
             <div>
-              <label for="role" class="block font-medium mb-1">
+              <label for="role" class="block font-medium mb-3">
                 您的角色
               </label>
               <select 
                 id="role" 
-                class="w-full border border-slate-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-500 bg-white"
+                class="w-full border border-gray-lightest rounded-md px-4 py-3 focus:ring-2 focus:ring-blue-600 bg-white"
               >
                 <option value="buyer">買方/承租人</option>
                 <option value="seller">賣方/出租人</option>
@@ -225,30 +252,28 @@
                 <option value="other">其他</option>
               </select>
             </div>
-
-            <!-- 是否有權狀 -->
+            <!-- 權狀 -->
             <div>
-              <label class="block font-medium mb-2">
+              <label class="block font-medium mb-3">
                 對方是否出示產權證明/權狀
               </label>
-              <div class="flex gap-4">
-                <label class="flex items-center gap-2">
-                  <input type="radio" name="deed" value="yes" class="text-indigo-600 focus:ring-indigo-500">
+              <div class="flex gap-6">
+                <label class="flex items-center gap-3">
+                  <input type="radio" name="deed" value="yes" class="text-blue-600 focus:ring-blue-600">
                   <span>是</span>
                 </label>
-                <label class="flex items-center gap-2">
-                  <input type="radio" name="deed" value="no" class="text-indigo-600 focus:ring-indigo-500" checked>
+                <label class="flex items-center gap-3">
+                  <input type="radio" name="deed" value="no" class="text-blue-600 focus:ring-blue-600" checked>
                   <span>否</span>
                 </label>
-                <label class="flex items-center gap-2">
-                  <input type="radio" name="deed" value="unknown" class="text-indigo-600 focus:ring-indigo-500">
+                <label class="flex items-center gap-3">
+                  <input type="radio" name="deed" value="unknown" class="text-blue-600 focus:ring-blue-600">
                   <span>不確定</span>
                 </label>
               </div>
             </div>
-
-            <!-- 表單提交按鈕 -->
-            <div class="mt-2">
+            <!-- 送出 -->
+            <div class="mt-4">
               <button type="submit" class="btn-primary w-full">
                 <i class="fa-solid fa-magnifying-glass-chart mr-2"></i>
                 開始詳盡風險分析
@@ -256,145 +281,135 @@
             </div>
           </form>
         </div>
-
-        <!-- 範例情境區塊 -->
-        <div class="card mt-6">
-          <h3 class="font-medium flex items-center gap-2 mb-3">
-            <i class="fa-solid fa-lightbulb text-amber-500"></i>
+        <!-- 範例 -->
+        <div class="card mt-8">
+          <h3 class="font-medium flex items-center gap-2 mb-4">
+            <i class="fa-solid fa-lightbulb text-yellow-500"></i>
             <span>常見情境範例</span>
           </h3>
-          <div class="grid gap-3">
+          <div class="grid gap-4">
             <button 
-              class="example-scenario text-left p-3 bg-slate-50 hover:bg-slate-100 rounded-md transition"
-              data-scenario="屋主在國外，要求我先匯6萬訂金才能保留房子，說是因為疫情關係無法親自面交，但需要我先付款才能確保房子不賣給別人。"
+              class="example-scenario text-left p-4 bg-white border border-gray-lighter rounded-md"
+              data-scenario="屋主在國外，要求我先匯6萬訂金才能保留房子。對方說因為有很多人詢問，所以需要先付訂金才能確保房子不被其他人租走。我還沒看過房子，但照片看起來很漂亮，房租也比市場便宜。"
             >
-              <p class="font-medium mb-1">遠距交易預付訂金</p>
-              <p class="text-sm text-slate-600">屋主在國外，要求我先匯6萬訂金才能保留房子，說是因為疫情關係無法親自面交...</p>
+              <p class="font-medium mb-2">遠距交易預付訂金</p>
+              <p class="text-sm text-gray-600">屋主說無法見面，需要匯款保留房子...</p>
             </button>
-            
             <button 
-              class="example-scenario text-left p-3 bg-slate-50 hover:bg-slate-100 rounded-md transition"
-              data-scenario="房東說租約不用填身分證號和地址，只要給名字就好，也不用簽正式合約，用訂金收據即可，說是為了方便以後退租，還說房子很熱門，如果不快點簽約付訂金就會租給別人。"
+              class="example-scenario text-left p-4 bg-white border border-gray-lighter rounded-md"
+              data-scenario="房東說租約不用簽正式文件，只用收據即可。房東表示自己比較喜歡簡單的方式，不想要複雜的合約，說我們互相信任就好。押金和第一個月房租需要先繳，等我搬進去後再給鑰匙。"
             >
-              <p class="font-medium mb-1">簡易租約不完整</p>
-              <p class="text-sm text-slate-600">房東說租約不用填身分證號和地址，只要給名字就好，也不用簽正式合約...</p>
+              <p class="font-medium mb-2">簡易租約不完整</p>
+              <p class="text-sm text-gray-600">房東要求用非正式方式進行交易...</p>
             </button>
-            
             <button 
-              class="example-scenario text-left p-3 bg-slate-50 hover:bg-slate-100 rounded-md transition"
-              data-scenario="有人自稱銀行的貸款專員，說有銀行內部特殊管道可以幫我辦理成數較高的房貸，但需要我先支付代辦費2萬元，之後會協助貸款審核加速通過。對方強調這是非公開的VIP服務。"
+              class="example-scenario text-left p-4 bg-white border border-gray-lighter rounded-md"
+              data-scenario="有人自稱銀行內部貸款管道，要求先支付代辦費3萬元，就能協助我獲得較高成數的房貸。對方說是銀行VIP專員，可以幫我走特殊管道，保證貸款成功，但需要先繳交手續費才能開始申請程序。"
             >
-              <p class="font-medium mb-1">代辦貸款預付費用</p>
-              <p class="text-sm text-slate-600">有人自稱銀行的貸款專員，說有銀行內部特殊管道可以幫我辦理成數較高的房貸...</p>
+              <p class="font-medium mb-2">代辦貸款預付費用</p>
+              <p class="text-sm text-gray-600">強調 VIP 管道，可協助貸款但須先付款...</p>
             </button>
           </div>
         </div>
-      </div>
-      
-      <!-- 側邊欄 -->
-      <div class="lg:col-span-1">
-        <!-- 為什麼選擇我們 -->
-        <div class="card">
-          <h3 class="font-medium mb-4">為什麼選擇詳細諮詢</h3>
-          <ul class="space-y-3">
-            <li class="flex gap-3">
-              <div class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-                <i class="fa-solid fa-check text-xs"></i>
-              </div>
-              <div>
-                <p class="font-medium">更精準的風險評估</p>
-                <p class="text-sm text-slate-600">透過更多細節提供更全面的風險分析</p>
-              </div>
-            </li>
-            <li class="flex gap-3">
-              <div class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-                <i class="fa-solid fa-check text-xs"></i>
-              </div>
-              <div>
-                <p class="font-medium">專家諮詢建議</p>
-                <p class="text-sm text-slate-600">根據您的情況提供專業法律和不動產建議</p>
-              </div>
-            </li>
-            <li class="flex gap-3">
-              <div class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-                <i class="fa-solid fa-check text-xs"></i>
-              </div>
-              <div>
-                <p class="font-medium">詳細防範指南</p>
-                <p class="text-sm text-slate-600">獲得具體的防詐步驟與解決方案</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        
-        <!-- 用戶評價 -->
-        <div class="card mt-6">
-          <h3 class="font-medium mb-4">用戶評價</h3>
-          <div class="space-y-4">
-            <div class="text-amber-500 flex gap-1 mb-2">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <p class="italic text-slate-700">"透過這個系統及時發現了租屋詐騙，省下了我 3 萬元的訂金損失！專業的分析讓我立即辨識出對方的話術陷阱。"</p>
-            <div class="flex items-center gap-2 mt-2">
-              <img src="/api/placeholder/32/32" alt="用戶頭像" class="w-6 h-6 rounded-full">
-              <span class="text-sm font-medium">林小姐，台北市</span>
-            </div>
-          </div>
-        </div>
-        
         <!-- 客服聯繫 -->
-        <div class="card mt-6 bg-indigo-50 border-indigo-100">
-          <h3 class="font-medium mb-3">需要即時協助？</h3>
-          <p class="text-sm text-slate-700 mb-4">
+        <div class="card mt-8 bg-indigo-50 border border-blue-100">
+          <h3 class="font-medium mb-4">需要即時協助？</h3>
+          <p class="text-sm text-gray-700 mb-6">
             若您遇到緊急詐騙情況，可以透過以下方式聯繫我們：
           </p>
-          <div class="space-y-3">
-            <div class="flex items-center gap-2">
-              <i class="fa-solid fa-phone text-indigo-600"></i>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-phone text-blue-600"></i>
               <span>詐騙諮詢專線：02-2345-6789</span>
             </div>
-            <div class="flex items-center gap-2">
-              <i class="fa-solid fa-envelope text-indigo-600"></i>
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-envelope text-blue-600"></i>
               <span>service@antifraud.ai</span>
             </div>
-            <a href="#" class="btn-primary block text-center mt-4">
+            <a href="#" class="btn-primary block text-center mt-6">
               <i class="fa-solid fa-comments mr-1"></i>
               線上客服
             </a>
           </div>
         </div>
       </div>
+      <!-- 右欄 -->
+      <div class="lg:col-span-1">
+        <div class="card">
+          <h3 class="font-medium mb-5">為什麼選擇我們</h3>
+          <ul class="space-y-4">
+            <li class="flex gap-4">
+              <div class="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-check text-xs"></i>
+              </div>
+              <div>
+                <p class="font-medium">更精準的風險評估</p>
+                <p class="text-sm text-gray-600">透過更多細節提供全面風險分析</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <div class="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-check text-xs"></i>
+              </div>
+              <div>
+                <p class="font-medium">專家諮詢建議</p>
+                <p class="text-sm text-gray-600">提供法律與不動產領域專業協助</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <div class="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-check text-xs"></i>
+              </div>
+              <div>
+                <p class="font-medium">詳細防詐指南</p>
+                <p class="text-sm text-gray-600">具體防範步驟，強化風險意識</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="card mt-8">
+          <h3 class="font-medium mb-5">用戶評價</h3>
+          <div class="space-y-4">
+            <div class="text-yellow-500 flex gap-1 mb-3">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="italic text-gray-700">"透過系統我即時辨識詐騙話術，省下3萬訂金損失！"</p>
+            <div class="flex items-center gap-3 mt-3">
+              <img src="/api/placeholder/32/32" class="w-6 h-6 rounded-full" />
+              <span class="text-sm font-medium">林小姐，台北市</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- 分析結果區域 -->
-    <div id="resultWrapper" class="mt-10">
-      <div id="loading" class="hidden py-12 flex flex-col items-center justify-center">
-        <i class="fa-solid fa-circle-notch fa-spin text-indigo-600 text-3xl mb-4"></i>
-        <p class="text-slate-700">AI 深度分析中，請稍候...</p>
-        <p class="text-sm text-slate-500 mt-2">我們正在分析您提供的情境，辨識潛在詐騙風險</p>
+    <!-- 分析結果區塊 -->
+    <div id="resultWrapper" class="mt-12">
+      <div id="loading" class="hidden py-16 flex flex-col items-center justify-center">
+        <i class="fa-solid fa-circle-notch fa-spin text-blue-600 text-3xl mb-6"></i>
+        <p class="text-gray-700 text-lg mb-2">AI 深度分析中，請稍候...</p>
+        <p class="text-sm text-gray-500">我們正在分析您提供的情境，辨識潛在詐騙風險</p>
       </div>
 
-      <section id="results" class="mt-6"></section>
+      <section id="results" class="mt-8"></section>
     </div>
   </main>
 
   <!-- ──────────────  CTA Section  ────────────── -->
-  <section class="bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 text-white py-20">
+  <section class="bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 text-white py-20">
     <div class="container text-center px-6">
-      <h2 class="text-3xl font-bold mb-6">保護您的不動產交易安全</h2>
-      <p class="max-w-2xl mx-auto text-lg opacity-90 mb-10">
+      <h2 class="text-3xl font-bold mb-8">保護您的不動產交易安全</h2>
+      <p class="max-w-2xl mx-auto text-lg opacity-90 mb-12 leading-relaxed">
         每年有超過 5,000 名民眾遭受不動產詐騙，損失金額高達數億元。
         透過 AntiFraud AI 的專業分析，在交易前做好風險評估，確保您的財產安全。
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="index.html" class="px-6 py-3 bg-white text-indigo-100 font-semibold rounded-md hover:bg-slate-100 transition">
+      <div class="flex flex-col sm:flex-row gap-5 justify-center">
+        <a href="index.html" class="px-8 py-3 bg-white text-blue-700 font-semibold rounded-md hover:bg-gray-100 transition">
           快速評估
         </a>
-        <a href="knowledge.html" class="px-6 py-3 bg-indigo-800 text-white font-semibold rounded-md hover:bg-indigo-900 transition">
+        <a href="knowledge.html" class="px-8 py-3 bg-blue-900 text-white font-semibold rounded-md hover:bg-blue-950 transition">
           了解詐騙手法
         </a>
       </div>
@@ -402,64 +417,63 @@
   </section>
 
   <!-- ──────────────  Footer  ────────────── -->
-  <footer class="bg-slate-900 text-slate-400 py-12">
+  <footer class="bg-gray-900 text-gray-400 py-12">
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <a href="index.html" class="text-lg font-semibold text-white flex items-center gap-2 mb-4">
-            <i class="fa-solid fa-shield-halved"></i>AntiFraud AI
+            <i class="fa-solid fa-shield-halved"></i> AntiFraud AI
           </a>
-          <p class="text-sm">以人工智慧技術守護您的不動產交易安全，提供即時詐騙風險評估與專業建議。</p>
-          
+          <p class="text-sm mb-4">以人工智慧技術守護您的不動產交易安全，提供即時詐騙風險評估與專業建議。</p>
           <div class="flex gap-4 mt-4">
-            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-line"></i></a>
-            <a href="#" class="text-slate-400 hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-line"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-instagram"></i></a>
           </div>
         </div>
-        
+
         <div>
           <h4 class="font-medium text-white mb-4">服務功能</h4>
-          <ul class="space-y-2 text-sm">
+          <ul class="space-y-3 text-sm">
             <li><a href="index.html" class="hover:text-white">詐騙風險評估</a></li>
             <li><a href="knowledge.html" class="hover:text-white">詐騙手法知識庫</a></li>
             <li><a href="consultation.html" class="hover:text-white">專業線上諮詢</a></li>
             <li><a href="#" class="hover:text-white">申訴與舉報</a></li>
           </ul>
         </div>
-        
+
         <div>
           <h4 class="font-medium text-white mb-4">關於我們</h4>
-          <ul class="space-y-2 text-sm">
+          <ul class="space-y-3 text-sm">
             <li><a href="#" class="hover:text-white">品牌理念</a></li>
             <li><a href="#" class="hover:text-white">團隊介紹</a></li>
             <li><a href="#" class="hover:text-white">合作夥伴</a></li>
             <li><a href="#" class="hover:text-white">媒體報導</a></li>
           </ul>
         </div>
-        
+
         <div>
           <h4 class="font-medium text-white mb-4">聯繫我們</h4>
-          <ul class="space-y-2 text-sm">
-            <li class="flex gap-2">
-              <i class="fa-solid fa-envelope text-indigo-400 mt-1"></i>
+          <ul class="space-y-3 text-sm">
+            <li class="flex gap-3">
+              <i class="fa-solid fa-envelope text-blue-400 mt-1"></i>
               <span>service@antifraud.ai</span>
             </li>
-            <li class="flex gap-2">
-              <i class="fa-solid fa-phone text-indigo-400 mt-1"></i>
+            <li class="flex gap-3">
+              <i class="fa-solid fa-phone text-blue-400 mt-1"></i>
               <span>02-2345-6789</span>
             </li>
-            <li class="flex gap-2">
-              <i class="fa-solid fa-location-dot text-indigo-400 mt-1"></i>
+            <li class="flex gap-3">
+              <i class="fa-solid fa-location-dot text-blue-400 mt-1"></i>
               <span>台北市信義區信義路五段7號</span>
             </li>
           </ul>
         </div>
       </div>
-      
-      <div class="border-t border-slate-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-xs">
+
+      <div class="border-t border-gray-800 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
         <p>© 2025 AntiFraud AI. 版權所有。</p>
-        <div class="flex gap-4 mt-4 md:mt-0">
+        <div class="flex gap-6 mt-4 md:mt-0">
           <a href="#" class="hover:text-white">使用條款</a>
           <a href="#" class="hover:text-white">隱私政策</a>
           <a href="#" class="hover:text-white">Cookie 政策</a>
@@ -467,5 +481,193 @@
       </div>
     </div>
   </footer>
+
+  <!-- JavaScript 引入正確的外部 JS 檔案 -->
+  <script src="js/api-service.js"></script>
+  <script src="js/ui.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 字數計數功能
+      const descTextarea = document.getElementById('desc');
+      const charCount = document.getElementById('charCount');
+      
+      if (descTextarea) {
+        descTextarea.addEventListener('input', function() {
+          const currentLength = descTextarea.value.length;
+          charCount.textContent = `${currentLength} / 500 字`;
+        });
+      }
+      
+      // 表單提交處理
+      const consultForm = document.getElementById('consultForm');
+      const loading = document.getElementById('loading');
+      const results = document.getElementById('results');
+      
+      if (consultForm) {
+        consultForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          // 表單驗證
+          const desc = descTextarea.value.trim();
+          const descError = document.getElementById('desc-error');
+          
+          if (desc.length < 10) {
+            descError.textContent = '請提供更詳細的情境描述（至少10個字）';
+            descError.classList.remove('hidden');
+            return;
+          } else {
+            descError.classList.add('hidden');
+          }
+          
+          // 顯示載入動畫
+          loading.classList.remove('hidden');
+          results.innerHTML = '';
+          
+          try {
+            const payload = {
+              description: desc,
+              amount: Number(document.getElementById("amount").value || 0),
+              role: document.getElementById("role").value,
+              has_title_deed: document.querySelector("[name=deed]:checked")?.value === "yes"
+            };
+            
+            // 檢查是否已載入模組函數
+            if (typeof queryFraud === 'function' && typeof renderResults === 'function') {
+              // 使用 api-service.js 和 ui.js 中定義的函數
+              const data = await queryFraud(payload, 2);
+              renderResults(data, results);
+            } else {
+              // 回退方案：顯示模擬結果
+              setTimeout(function() {
+                const resultHTML = `
+                  <div class="card border-l-4 border-yellow-500">
+                    <div class="flex justify-between items-start mb-6">
+                      <div>
+                        <h3 class="text-xl font-bold mb-2">詐騙風險評估結果</h3>
+                        <p class="text-gray-600">基於您提供的資訊，我們的 AI 系統評估如下</p>
+                      </div>
+                      <div class="bg-yellow-100 text-yellow-800 font-semibold px-4 py-2 rounded-full">
+                        中度風險
+                      </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                      <h4 class="font-semibold mb-4">風險警示摘要</h4>
+                      <p class="text-gray-700 leading-relaxed">
+                        您描述的情境顯示多項可疑跡象，包含交易對象無法提供完整證明文件，且要求非標準流程進行付款。
+                        此類交易模式符合常見的預付詐騙模式，建議進一步核實對方身份及房產資訊。
+                      </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                      <div class="p-4 bg-red-50 rounded-lg border border-red-100">
+                        <h5 class="font-medium text-red-800 mb-2">高風險因素</h5>
+                        <ul class="text-sm space-y-2">
+                          <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-red-500 mt-1"></i>
+                            <span>未經實地查看即要求付款</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-red-500 mt-1"></i>
+                            <span>無法提供完整產權證明</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-100">
+                        <h5 class="font-medium text-yellow-800 mb-2">中風險因素</h5>
+                        <ul class="text-sm space-y-2">
+                          <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-exclamation text-yellow-500 mt-1"></i>
+                            <span>非正規付款管道</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-exclamation text-yellow-500 mt-1"></i>
+                            <span>價格明顯低於市場行情</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
+                        <h5 class="font-medium text-blue-800 mb-2">建議行動</h5>
+                        <ul class="text-sm space-y-2">
+                          <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1"></i>
+                            <span>實地查看房屋</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1"></i>
+                            <span>要求查閱房屋所有權證明</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1"></i>
+                            <span>使用合法支付方式</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                      <h4 class="font-semibold mb-4">專家建議</h4>
+                      <div class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                        <p class="text-gray-700 leading-relaxed">
+                          建議您：
+                        </p>
+                        <ol class="list-decimal list-inside space-y-3 mt-4">
+                          <li>堅持實地看房，確認房屋狀況與描述一致</li>
+                          <li>向地政機關查詢產權資訊，確認賣方身份與權益</li>
+                          <li>使用合法的銀行支付管道，避免現金或非正規匯款</li>
+                          <li>簽訂正式合約，確保雙方權益受到保障</li>
+                          <li>若有疑慮，建議尋求專業地政士或律師諮詢</li>
+                        </ol>
+                      </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 pt-6">
+                      <div class="flex justify-between items-center">
+                        <h4 class="font-semibold">對此分析有任何疑問？</h4>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+                          <i class="fa-solid fa-message mr-1"></i>
+                          聯繫專業顧問
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                `;
+                results.innerHTML = resultHTML;
+                loading.classList.add('hidden');
+              }, 1500);
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            loading.classList.add('hidden');
+            results.innerHTML = `
+              <div class="card border-l-4 border-red-500 p-6">
+                <h3 class="text-xl font-semibold mb-4">分析處理發生錯誤</h3>
+                <p>很抱歉，我們無法完成您的風險分析請求。請稍後再試。</p>
+              </div>
+            `;
+          }
+        });
+      }
+      
+      // 範例情境點擊事件
+      const scenarioButtons = document.querySelectorAll('.example-scenario');
+      
+      scenarioButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const scenario = this.getAttribute('data-scenario');
+          descTextarea.value = scenario;
+          
+          // 觸發 input 事件以更新字數計數
+          const event = new Event('input', { bubbles: true });
+          descTextarea.dispatchEvent(event);
+          
+          // 滾動到表單位置
+          descTextarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          descTextarea.focus();
+        });
+      });
+    });
+  </script>
 </body>
 </html>

@@ -11,157 +11,169 @@
     <!-- 自定義樣式 -->
     <style>
       :root {
-        /* 主色調（亮紫藍系，帶科技感） */
-        --primary: #6366F1; /* 主色亮一點 */
-        --primary-dark: #4F46E5; /* hover 深色 */
-        --primary-light: #A5B4FC; /* 主色淡色 */
-        --primary-lighter: #E0E7FF;
-        --primary-lightest: #EEF2FF;
-      
-        /* 輔助色（天藍色，活潑感） */
-        --secondary: #38BDF8;
-        --secondary-dark: #0EA5E9;
-        --secondary-light: #7DD3FC;
-        --secondary-lighter: #BAE6FD;
-        --secondary-lightest: #E0F2FE;
-      
-        /* 成功、警告、錯誤 */
-        --success: #10B981;
-        --warning: #F59E0B;
-        --danger: #EF4444;
-      
-        /* 灰階配色（背景＋文字） */
-        --dark: #334155; /* 字色微提亮 */
-        --light: #F1F5F9;
-        --gray-dark: #475569;
-        --gray: #64748B;
-        --gray-light: #94A3B8;
-        --gray-lighter: #CBD5E1;
-        --gray-lightest: #F8FAFC;
+        /* 主色調：深藍（更穩重） */
+        --primary: #1E3A8A;
+        --primary-dark: #172554;
+        --primary-light: #3B82F6;
+        --primary-lighter: #60A5FA;
+        --primary-lightest: #BFDBFE;
+    
+        /* 輔助色：深棕銅 */
+        --secondary: #92400E;
+        --secondary-dark: #78350F;
+        --secondary-light: #D97706;
+        --secondary-lighter: #F59E0B;
+        --secondary-lightest: #FDE68A;
+    
+        /* 成功、警告、錯誤：加深 */
+        --success: #065F46;
+        --warning: #92400E;
+        --danger: #991B1B;
+    
+        /* 灰階色系：更深一階 */
+        --dark: #111827;
+        --light: #E5E7EB;
+        --gray-dark: #1F2937;
+        --gray: #374151;
+        --gray-light: #6B7280;
+        --gray-lighter: #9CA3AF;
+        --gray-lightest: #D1D5DB;
       }
-      
-      /* 全局基礎樣式 */
+    
       body {
-        background-color: var(--gray-lightest);
+        background-color: var(--light);
         color: var(--dark);
         font-family: 'Inter', sans-serif;
       }
-      
-      /* 容器 */
+    
       .container {
-        width: 100%;
         max-width: 1200px;
         padding-left: 1.5rem;
         padding-right: 1.5rem;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
       }
-      
-      /* 卡片 */
+    
       .card {
         background-color: white;
-        border-radius: 0.75rem;
-        box-shadow: 0 6px 10px -2px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.05);
+        color: var(--dark);
+        border: 1px solid var(--gray-lightest);
+        border-radius: 0.5rem;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
         padding: 1.5rem;
-        position: relative;
         transition: all 0.3s ease;
       }
+    
       .card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       }
-      
-      /* 按鈕樣式 */
+    
       .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
         background-color: var(--primary);
         color: white;
         font-weight: 600;
         padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
+        border-radius: 0.375rem;
         transition: all 0.2s ease;
-        box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+        box-shadow: 0 2px 6px rgba(30, 58, 138, 0.4);
       }
+    
       .btn-primary:hover {
         background-color: var(--primary-dark);
-        transform: scale(1.03);
-        box-shadow: 0 4px 8px rgba(79, 70, 229, 0.4);
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(23, 37, 84, 0.5);
       }
-      
+    
       .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
         background-color: white;
-        color: var(--gray-dark);
-        border: 1px solid var(--gray-lighter);
+        color: var(--secondary);
+        border: 1px solid var(--secondary-light);
         font-weight: 500;
         padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
+        border-radius: 0.375rem;
         transition: all 0.2s ease;
       }
+    
       .btn-secondary:hover {
-        border-color: var(--primary);
-        color: var(--primary);
-        background-color: var(--primary-lightest);
+        background-color: var(--secondary-lightest);
+        color: var(--secondary-dark);
+        border-color: var(--secondary);
       }
-      
-      /* Hero 區塊背景（更現代感） */
+    
       .hero {
-        background: linear-gradient(135deg, var(--primary-lightest) 0%, white 100%);
+        background: linear-gradient(to bottom right, var(--primary-lightest) 0%, white 100%);
+        border-bottom: 1px solid var(--gray-lightest);
       }
-      
-      /* 去掉左上圓形裝飾，只保留右下小圈 */
+    
       .hero > div.absolute.top-12.left-10 {
         display: none;
       }
-      
-      /* 頁腳 */
+    
       footer {
         background-color: var(--dark);
-        color: var(--gray-light);
+        color: var(--gray-lightest);
         padding: 4rem 0 2rem;
       }
+    
       footer a {
-        color: var(--gray-light);
+        color: var(--primary-lighter);
         transition: color 0.2s ease;
       }
+    
       footer a:hover {
         color: white;
       }
-      
-      /* 風險提示區塊 */
+    
+      /* 風險提示區塊背景 */
       .risk-high {
         border-left: 4px solid var(--danger);
-        background-color: rgba(239, 68, 68, 0.05);
+        background-color: rgba(153, 27, 27, 0.1);
       }
+    
       .risk-medium {
         border-left: 4px solid var(--warning);
-        background-color: rgba(245, 158, 11, 0.05);
+        background-color: rgba(146, 64, 14, 0.1);
       }
+    
       .risk-low {
         border-left: 4px solid var(--success);
-        background-color: rgba(16, 185, 129, 0.05);
+        background-color: rgba(6, 95, 70, 0.1);
       }
-      
-      /* 動畫效果 */
+    
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
       }
+    
       .animate-fadeIn {
         animation: fadeIn 0.5s ease forwards;
       }
-      
-      /* 響應式調整 */
+    
       @media (max-width: 768px) {
         .hero {
           padding: 4rem 0;
         }
       }
-      </style>
+    
+      textarea {
+        background-color: white;
+        color: var(--dark);
+        border: 1px solid var(--gray-lightest);
+      }
+    
+      textarea::placeholder {
+        color: var(--gray);
+      }
+    
+      .bg-indigo-50 {
+        background-color: var(--primary-lightest) !important;
+      }
+    
+      .text-slate-500,
+      .text-slate-700 {
+        color: var(--gray-dark) !important;
+      }
+    </style>
     
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
@@ -244,8 +256,8 @@
         switch(data.riskLevel) {
           case "high":
             iconClass = "fa-triangle-exclamation";
-            bgClass = "bg-rose-100";
-            textClass = "text-rose-600";
+            bgClass = "bg-red-100";
+            textClass = "text-red-700";
             break;
           case "medium":
             iconClass = "fa-exclamation";
@@ -271,7 +283,7 @@
               </div>
               <div>
                 <h3 class="font-semibold ${textClass}">${data.title}</h3>
-                <p class="text-slate-600 text-sm">${data.description}</p>
+                <p class="text-gray-600 text-sm">${data.description}</p>
               </div>
             </div>
             <p class="text-sm mb-3">${data.analysis}</p>
@@ -280,12 +292,12 @@
                 ${data.riskLevel === "high" ? "立即行動建議" : 
                   data.riskLevel === "medium" ? "建議您進一步確認" : "一般防範建議"}
               </h4>
-              <ul class="list-disc ml-5 text-slate-700 space-y-1">
+              <ul class="list-disc ml-5 text-gray-700 space-y-1">
                 ${data.suggestions.map(s => `<li>${s}</li>`).join('')}
               </ul>
             </div>
             <div class="mt-4 pt-4 border-t border-slate-200">
-              <a href="${data.learnMoreLink}" class="text-indigo-600 hover:underline text-sm inline-flex items-center">
+              <a href="${data.learnMoreLink}" class="text-blue-700 hover:text-blue-900 hover:underline text-sm inline-flex items-center">
                 <span>
                   ${data.riskLevel === "high" ? "了解更多此類詐騙手法" : 
                     data.riskLevel === "medium" ? "諮詢專業律師意見" : "瀏覽常見交易安全須知"}
@@ -345,7 +357,7 @@
     </script>
   </head>
 
-  <body class="bg-slate-50 font-[Inter] text-slate-800">
+  <body class="font-[Inter] text-gray-900 bg-gray-50">
     <!-- ──────────────  Navbar  ────────────── -->
     <header class="navbar sticky top-0 z-40 bg-white/90 backdrop-blur-sm shadow-sm">
       <div class="container flex items-center justify-between py-3">
@@ -372,7 +384,7 @@
         </nav>
         
         <!-- Mobile menu button -->
-        <button class="md:hidden text-slate-700 hover:text-indigo-600">
+        <button class="md:hidden text-gray-700 hover:text-indigo-600">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -390,7 +402,7 @@
     </header>
 
     <!-- ──────────────  Hero  ────────────── -->
-<section class="relative bg-slate-700 py-24 overflow-hidden">
+<section class="relative hero py-24 overflow-hidden">
   <div class="container relative text-center px-6">
     <span class="inline-block py-1 px-4 rounded-full bg-indigo-200 text-indigo-800 text-sm font-semibold mb-6 shadow-sm">
       <i class="fa-solid fa-shield-halved mr-1"></i> AI 智能防詐系統
@@ -400,16 +412,16 @@
       不動產詐騙風險<span class="text-indigo-700">快速評估</span>
     </h1>
 
-    <p class="max-w-2xl mx-auto text-slate-700 text-lg mb-10">
+    <p class="max-w-2xl mx-auto text-gray-700 text-lg mb-10">
       以 AI 大模型 + 專家規則雙重判斷，一鍵偵測潛在詐騙手法，
       <span class="whitespace-nowrap">30 秒內</span> 為你的交易保駕護航。
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="#assess" class="px-6 py-3 bg-indigo-700 text-white rounded-lg font-semibold shadow-lg hover:bg-indigo-800 transition">
+      <a href="#assess" class="btn-primary">
         立即開始評估
       </a>
-      <a href="knowledge.html" class="px-6 py-3 bg-white text-indigo-700 border border-indigo-300 rounded-lg font-semibold hover:bg-indigo-50 transition">
+      <a href="knowledge.html" class="btn-secondary">
         了解常見詐騙手法
       </a>
     </div>
@@ -459,10 +471,10 @@
               <i class="fa-solid fa-lightbulb mr-1"></i> 情境參考範例
             </h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-              <button class="example-btn text-left p-2 bg-white rounded border border-slate-200 hover:border-indigo-300 transition">
+              <button class="example-btn text-left p-2 bg-white rounded border border-gray-200 hover:border-indigo-300 transition">
                 房東要求先匯訂金到個人帳戶保留物件，不然會租給別人...
               </button>
-              <button class="example-btn text-left p-2 bg-white rounded border border-slate-200 hover:border-indigo-300 transition">
+              <button class="example-btn text-left p-2 bg-white rounded border border-gray-200 hover:border-indigo-300 transition">
                 屋主說有很多人要看，要我先付5萬訂金才帶看房子...
               </button>
             </div>
@@ -473,7 +485,7 @@
             <div id="loading" class="hidden text-center py-8">
               <div class="inline-block">
                 <i class="fa-solid fa-circle-notch fa-spin text-indigo-600 text-2xl mb-2"></i>
-                <p class="text-slate-600 text-sm">AI 分析中...</p>
+                <p class="text-gray-600 text-sm">AI 分析中...</p>
               </div>
             </div>
             <div id="results" class="grid gap-4"></div>
@@ -487,7 +499,7 @@
             <i class="fa-solid fa-shield-halved text-indigo-600"></i>
           </div>
           <h3 class="font-medium mb-2">精準風險分析</h3>
-          <p class="text-sm text-slate-600">AI 模型訓練自過千筆真實詐騙案例，精準辨識常見不動產詐騙模式</p>
+          <p class="text-sm text-gray-600">AI 模型訓練自過千筆真實詐騙案例，精準辨識常見不動產詐騙模式</p>
         </div>
         
         <div class="card text-center p-6 hover:shadow-md transition-all duration-300">
@@ -495,7 +507,7 @@
             <i class="fa-solid fa-bolt text-indigo-600"></i>
           </div>
           <h3 class="font-medium mb-2">30秒快速評估</h3>
-          <p class="text-sm text-slate-600">輸入描述後立即獲得評估結果，不需繁複表單，節省您寶貴時間</p>
+          <p class="text-sm text-gray-600">輸入描述後立即獲得評估結果，不需繁複表單，節省您寶貴時間</p>
         </div>
         
         <div class="card text-center p-6 hover:shadow-md transition-all duration-300">
@@ -503,7 +515,7 @@
             <i class="fa-solid fa-user-tie text-indigo-600"></i>
           </div>
           <h3 class="font-medium mb-2">專家諮詢支援</h3>
-          <p class="text-sm text-slate-600">提供專業不動產律師與資安專家諮詢服務，解決您的疑問</p>
+          <p class="text-sm text-gray-600">提供專業不動產律師與資安專家諮詢服務，解決您的疑問</p>
         </div>
       </div>
     
@@ -514,7 +526,7 @@
     </main>
 
     <!-- ──────────────  Footer  ────────────── -->
-    <footer class="bg-slate-900 text-slate-400">
+    <footer>
       <div class="container py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h4 class="font-medium text-white mb-4">服務功能</h4>
