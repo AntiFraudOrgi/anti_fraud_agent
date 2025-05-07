@@ -13,15 +13,16 @@ class RuleEngineAgent:
     def __init__(self):
         self._aeval = Interpreter(usersyms=_SAFE_NAMES, err_writer=None)
 
-    def score(self, user_info: dict[str], calc_rule: str, baseline: float) -> float:
+    def score(self, user_info: dict[str], calc_rule: str, baseline: float, similarity_score: float = 1.0) -> float:
         """
         Args
         ----
         user_info : {'amount': 60000, 'has_title_deed': False, ...}
         calc_rule : str, e.g. "risk = baseline + 0.2*(amount>50000) + 0.1*(not has_title_deed)"
         baseline  : float, base risk in [0,1)
+        similarity_score : float, 預設為 1.0，可根據相似度調整風險分數
         """
-        _locals = {"baseline": baseline, **user_info}
+        _locals = {"baseline": baseline, "similarity_score": similarity_score, **user_info}
         try:
             self._aeval.symtable.update(_locals)
             self._aeval(calc_rule)

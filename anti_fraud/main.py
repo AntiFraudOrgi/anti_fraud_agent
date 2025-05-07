@@ -41,7 +41,7 @@ def ask_loop():
             print(f" {i}. {hit['title']}  "
                   f"[FSE: {hit['fse_id']}]  "
                   f"Risk: {hit['risk_score']:.2f}  "
-                  f"(語意:{hit['similarity']:.2f}/規則:{hit['rule_score']:.2f})")
+                  f"(語意相似度: {hit['semantic_similarity']:.2f} / 字詞相似度: {hit['word_similarity']:.2f})")
         print("-" * 60)
 
 # ---------- 程式進入點 ----------
