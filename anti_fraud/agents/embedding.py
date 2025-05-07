@@ -4,6 +4,10 @@ import numpy as np
 from langchain_openai import OpenAIEmbeddings
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import jieba
+jieba.setLogLevel(jieba.logging.WARN)
+import warnings
+warnings.filterwarnings("ignore", message="The parameter 'token_pattern' will not be used since 'tokenizer' is not None")
 
 import os 
 
@@ -28,13 +32,20 @@ class EmbeddingAgent:
         vec_a = vec_a / np.linalg.norm(vec_a)
         vec_b = vec_b / np.linalg.norm(vec_b)
         return float(np.dot(vec_a, vec_b))
-
+    
+    @staticmethod
+    def jieba_tokenizer(text):
+        """定義中文分詞器"""
+        return list(jieba.cut(text))
+    
     def calculate_tfidf_similarities(self, user_text: str, script_texts: list[str]) -> list[float]:
         """計算 user_text 與每個 script_text 的字詞相似度（TF-IDF）"""
-        tfidf = TfidfVectorizer()
+        tfidf = TfidfVectorizer(tokenizer=self.jieba_tokenizer)
         corpus = [user_text] + script_texts  # 第一個是 user 的輸入
+        # print(corpus)
         tfidf_matrix = tfidf.fit_transform(corpus)
         sims = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:])[0]
+        # print(sims)
         return sims.tolist()
     
     def calculate_semantic_similarity(self, desc: str, struct: dict) -> float:
