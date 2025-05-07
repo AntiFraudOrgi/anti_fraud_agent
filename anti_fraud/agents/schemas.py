@@ -7,6 +7,8 @@ class QueryIn(BaseModel):
     amount: Optional[int] = Field(0, example=60000)
     has_title_deed: Optional[bool] = Field(False, example=False)
     role: Optional[str] = Field("", example="房東")
+    tfidf_similarity: Optional[float] = Field(None, example=0.8)  # 字詞相似度
+    semantic_similarity: Optional[float] = Field(None, example=0.85)  # 語意相似度
 
 
 class ResultSchema(BaseModel):
@@ -15,3 +17,5 @@ class ResultSchema(BaseModel):
     similarity: float
     rule_score: float
     risk_score: float
+    tfidf_similarity: Optional[float] = None  # 字詞相似度
+    semantic_similarity: Optional[float] = None  # 語意相似度
