@@ -1,8 +1,8 @@
-from agents.user_query import UserQueryService
-from agents.script_registry import ScriptRegistry
-from agents.embedding import EmbeddingAgent
-from agents.rule_engine import RuleEngineAgent
-from agents.fusion_score import FusionScoringAgent
+from similarity.user_query import UserQueryService
+from similarity.script_registry import ScriptRegistry
+from similarity.embedding import EmbeddingAgent
+from similarity.rule_engine import RuleEngineAgent
+from similarity.fusion_score import FusionScoringAgent
 
 
 # -------- 系統初始化 --------

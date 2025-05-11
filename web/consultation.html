@@ -150,27 +150,27 @@
 </head>
 <body class="bg-gray-50 text-gray-900 font-[Inter]">
   <!-- ──────────────  Navbar  ────────────── -->
-  <header class="navbar sticky top-0 z-40 bg-white/90 backdrop-blur-sm shadow-sm">
-    <div class="container flex items-center justify-between py-3">
-      <a href="index.html" class="text-lg font-semibold text-blue-700 flex items-center gap-2">
+  <header class="navbar sticky top-0 z-40 bg-white shadow-sm">
+    <div class="container flex items-center justify-between py-3 px-6">
+      <a href="/" class="text-lg font-semibold text-blue-700 flex items-center gap-2">
         <div class="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-shield-halved"></i>
         </div>
         AntiFraud AI
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm">
-        <a href="index.html" class="hover:text-blue-800 flex items-center gap-1">
-          <i class="fa-solid fa-magnifying-glass text-xs"></i>
-          <span>快速評估</span>
-        </a>
-        <a href="consultation.html" class="text-blue-700 font-medium flex items-center gap-1">
-          <i class="fa-solid fa-user-tie text-xs"></i>
-          <span>專業諮詢</span>
-        </a>
-        <a href="knowledge.html" class="hover:text-blue-700 flex items-center gap-1">
-          <i class="fa-solid fa-book text-xs"></i>
-          <span>詐騙知識庫</span>
-        </a>
+          <a href="/" class="hover:text-blue-600 flex items-center gap-1 ">
+            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+            <span>快速評估</span>
+          </a>
+          <a href="consultation.html" class="flex items-center gap-1 text-blue-600 border-b-2 border-blue-500">
+            <i class="fa-solid fa-user-tie text-xs"></i>
+            <span>專業諮詢</span>
+          <a href="knowledge.html" class="hover:text-blue-600 flex items-center gap-1">
+            <i class="fa-solid fa-book text-xs"></i>
+            <span>詐騙知識庫</span>
+          </a>
+          </a>
       </nav>
       <!-- Mobile menu button -->
       <button class="md:hidden text-gray-700 hover:text-blue-600">
@@ -181,7 +181,7 @@
 
   <!-- ──────────────  Hero Section  ────────────── -->
   <section class="relative py-16 bg-indigo-50">
-    <div class="container">
+    <div class="container px-6">
       <div class="max-w-2xl">
         <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-4">
           <i class="fa-solid fa-user-tie mr-1"></i> 專業諮詢服務
@@ -199,7 +199,7 @@
   </section>
 
   <!-- ──────────────  Main Content Start ────────────── -->
-  <main class="container py-12">
+  <main class="container px-6 py-12">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- 左側：表單 -->
       <div class="lg:col-span-2">
@@ -336,14 +336,14 @@
       <!-- 右欄 -->
       <div class="lg:col-span-1">
         <div class="card">
-          <h3 class="font-medium mb-5">為什麼選擇我們</h3>
+          <h3 class="font-medium mb-5">我們提供以下服務</h3>
           <ul class="space-y-4">
             <li class="flex gap-4">
               <div class="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
                 <i class="fa-solid fa-check text-xs"></i>
               </div>
               <div>
-                <p class="font-medium">更精準的風險評估</p>
+                <p class="font-medium">精準的風險評估</p>
                 <p class="text-sm text-gray-600">透過更多細節提供全面風險分析</p>
               </div>
             </li>
@@ -352,8 +352,8 @@
                 <i class="fa-solid fa-check text-xs"></i>
               </div>
               <div>
-                <p class="font-medium">專家諮詢建議</p>
-                <p class="text-sm text-gray-600">提供法律與不動產領域專業協助</p>
+                <p class="font-medium">專家諮詢輔導</p>
+                <p class="text-sm text-gray-600">提供法律與不動產領域專業輔導</p>
               </div>
             </li>
             <li class="flex gap-4">
@@ -361,26 +361,11 @@
                 <i class="fa-solid fa-check text-xs"></i>
               </div>
               <div>
-                <p class="font-medium">詳細防詐指南</p>
-                <p class="text-sm text-gray-600">具體防範步驟，強化風險意識</p>
+                <p class="font-medium">詳細防詐腳本</p>
+                <p class="text-sm text-gray-600">紀錄常見防詐劇情，強化防詐意識</p>
               </div>
             </li>
           </ul>
-        </div>
-        <div class="card mt-8">
-          <h3 class="font-medium mb-5">用戶評價</h3>
-          <div class="space-y-4">
-            <div class="text-yellow-500 flex gap-1 mb-3">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <p class="italic text-gray-700">"透過系統我即時辨識詐騙話術，省下3萬訂金損失！"</p>
-            <div class="flex items-center gap-3 mt-3">
-              <img src="/api/placeholder/32/32" class="w-6 h-6 rounded-full" />
-              <span class="text-sm font-medium">林小姐，台北市</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -417,74 +402,60 @@
   </section>
 
   <!-- ──────────────  Footer  ────────────── -->
-  <footer class="bg-gray-900 text-gray-400 py-12">
-    <div class="container">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <a href="index.html" class="text-lg font-semibold text-white flex items-center gap-2 mb-4">
-            <i class="fa-solid fa-shield-halved"></i> AntiFraud AI
-          </a>
-          <p class="text-sm mb-4">以人工智慧技術守護您的不動產交易安全，提供即時詐騙風險評估與專業建議。</p>
-          <div class="flex gap-4 mt-4">
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-line"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-instagram"></i></a>
-          </div>
-        </div>
-
+  <footer>
+      <div class="container px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h4 class="font-medium text-white mb-4">服務功能</h4>
-          <ul class="space-y-3 text-sm">
+          <ul class="space-y-2 text-sm">
             <li><a href="index.html" class="hover:text-white">詐騙風險評估</a></li>
             <li><a href="knowledge.html" class="hover:text-white">詐騙手法知識庫</a></li>
             <li><a href="consultation.html" class="hover:text-white">專業線上諮詢</a></li>
             <li><a href="#" class="hover:text-white">申訴與舉報</a></li>
           </ul>
         </div>
-
+        
         <div>
           <h4 class="font-medium text-white mb-4">關於我們</h4>
-          <ul class="space-y-3 text-sm">
+          <ul class="space-y-2 text-sm">
             <li><a href="#" class="hover:text-white">品牌理念</a></li>
             <li><a href="#" class="hover:text-white">團隊介紹</a></li>
             <li><a href="#" class="hover:text-white">合作夥伴</a></li>
             <li><a href="#" class="hover:text-white">媒體報導</a></li>
           </ul>
         </div>
-
+        
         <div>
           <h4 class="font-medium text-white mb-4">聯繫我們</h4>
-          <ul class="space-y-3 text-sm">
-            <li class="flex gap-3">
+          <ul class="space-y-2 text-sm">
+            <li class="flex gap-2">
               <i class="fa-solid fa-envelope text-blue-400 mt-1"></i>
               <span>service@antifraud.ai</span>
             </li>
-            <li class="flex gap-3">
+            <li class="flex gap-2">
               <i class="fa-solid fa-phone text-blue-400 mt-1"></i>
               <span>02-2345-6789</span>
             </li>
-            <li class="flex gap-3">
+            <li class="flex gap-2">
               <i class="fa-solid fa-location-dot text-blue-400 mt-1"></i>
               <span>台北市信義區信義路五段7號</span>
             </li>
           </ul>
         </div>
       </div>
-
-      <div class="border-t border-gray-800 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+      
+      <div class="container border-t border-slate-800 mt-8 pt-6 px-6 flex flex-col md:flex-row justify-between items-center text-xs">
         <p>© 2025 AntiFraud AI. 版權所有。</p>
-        <div class="flex gap-6 mt-4 md:mt-0">
+        <div class="flex gap-4 mt-4 md:mt-0">
           <a href="#" class="hover:text-white">使用條款</a>
           <a href="#" class="hover:text-white">隱私政策</a>
           <a href="#" class="hover:text-white">Cookie 政策</a>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
   <!-- JavaScript 引入正確的外部 JS 檔案 -->
-  <script src="js/api-service.js"></script>
-  <script src="js/ui.js"></script>
+  <script src="static/js/api-service.js"></script>
+  <script src="static/js/ui.js"></script>
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
