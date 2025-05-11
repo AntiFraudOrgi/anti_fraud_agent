@@ -4,7 +4,7 @@
 import json
 import os
 import numpy as np
-from agents.embedding import EmbeddingAgent
+from similarity.embedding import EmbeddingAgent
 
 
 class ScriptRegistry:
