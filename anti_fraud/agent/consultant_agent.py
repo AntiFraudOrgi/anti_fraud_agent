@@ -29,7 +29,8 @@ class consultant_agent:
     risk_score: {risk_score}
     semantic_similarity: {semantic_similarity}
     """
-
+    
+    # default model: gpt-4o
     def __init__(self, model: str = "gpt-4o", max_fse: int = 2):
         load_dotenv()
         openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -67,10 +68,6 @@ class consultant_agent:
             )
         return "\n---\n".join(chunks)
 
-def consult(user_query: str, fse_list: list[dict]) -> str:  
-    agent = consultant_agent()
-    return agent.consult(user_query, fse_list)
-
 
 # testing
 if __name__ == "__main__":
@@ -90,7 +87,7 @@ if __name__ == "__main__":
             "semantic_similarity": 0.16,
         },
     ]
-
-    report = consult(user_query, fse_hits)
+    agent = consultant_agent()
+    report = agent.consult(user_query, fse_hits)
     print("\n🔍 AI 防詐騙專家報告：\n")
     print(report)
