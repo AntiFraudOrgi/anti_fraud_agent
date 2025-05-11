@@ -3,11 +3,9 @@ from similarity.script_registry import ScriptRegistry
 from similarity.embedding import EmbeddingAgent
 from similarity.rule_engine import RuleEngineAgent
 from similarity.fusion_score import FusionScoringAgent
+from agent.consultant_agent import consultant_agent          # ★ 新增：匯入 consult
 
-
-# -------- 系統初始化 --------
-DATA_PATH = "anti_fraud/fse.json"
-
+DATA_PATH = "fse.json"
 embedder = EmbeddingAgent()
 registry = ScriptRegistry(DATA_PATH, embedder)
 rule_engine = RuleEngineAgent()
@@ -17,7 +15,6 @@ def ask():
     desc = input("請描述你遇到的狀況：").strip()
     if not desc:
         print("Bye!")
-    # 其餘欄位可留空
     amount_in = input("💰 交易金額 (留空略過)：").strip()
     has_deed_in = input("📄 是否拿到權狀文件？(y/N)：").strip().lower()
     role_in = input("🧑‍💼 對方身分 (房東/仲介/貸款代辦… 可留空)：").strip()
@@ -32,16 +29,20 @@ def ask():
     # -------- 計算最相似 FSE --------
     struct = UserQueryService.normalize(payload)
     top_hits = fusion_agent.evaluate(desc, struct, top_k=3)
-        
-    print("\n📊 推薦結果 (RiskScore↑)：")
-    for i, hit in enumerate(top_hits, 1):
-        print(f" {i}. {hit['title']}  "
-              f"[FSE: {hit['fse_id']}]  "
-              f"Risk: {hit['risk_score']:.2f}  "
-             f"(語意相似度: {hit['semantic_similarity']:.2f} / 字詞相似度: {hit['word_similarity']:.2f})")
-    print("-" * 60)
+    """ test
+    1. 我看房前先匯錢過去給房東，後來他就沒下落了，我是不是被詐騙了呢？
+    """
+    report = consultant_agent.consult(desc, top_hits)          
+    print(report)
+    # print("\n📊 推薦結果 (RiskScore↑)：")
+    # for i, hit in enumerate(top_hits, 1):
+    #     print(f" {i}. {hit['title']}  "
+    #           f"[FSE: {hit['fse_id']}]  "
+    #           f"Risk: {hit['risk_score']:.2f}  "
+    #          f"(語意相似度: {hit['semantic_similarity']:.2f} / 字詞相似度: {hit['word_similarity']:.2f})")
+    # print("-" * 60)
 
 # ---------- 程式進入點 ----------
 if __name__ == "__main__":
     while True:
-         ask()
+        ask()
