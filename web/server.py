@@ -43,7 +43,7 @@ async def consultation_page():
 @app.get("/knowledge.html")
 async def knowledge_page():
     # 回傳知識庫頁面 knowledge.html
-    return FileResponse(BASE_DIR / "web/knowledge.html")
+    return FileResponse(BASE_DIR / "knowledge.html")
 
 # 啟動服務器
 if __name__ == "__main__":
