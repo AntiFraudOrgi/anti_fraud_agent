@@ -44,16 +44,21 @@ class consultant_agent:
         # self.law_db: list[dict] = json.loads(self.law_path.read_text("utf-8"))
 
     def consult(self, user_query: str, fse_list: list[dict]) -> str:
-        # tidy user prompt 
-        prompt = self._build_prompt(user_query, fse_list)
-        response = self._client.responses.create(
-            model=self.model,
-            input=[
-                {"role": "system", "content": self._SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ],
-        )
-        return response.output_text
+        try:
+            prompt = self._build_prompt(user_query, fse_list)
+            print("🧾 Prompt:\n", prompt)
+            response = self._client.chat.completions.create(  # 若你用 `openai==1.x`
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": self._SYSTEM_PROMPT},
+                    {"role": "user", "content": prompt},
+                ],
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            print("❌ 呼叫失敗:", e)
+            return "⚠️ 無法產生報告，請檢查輸入格式或 OpenAI 設定"
+
 
     def _build_prompt(self, user_query: str, fse_hits: list[dict]) -> str:
         chunks: list[str] = []
@@ -73,20 +78,21 @@ class consultant_agent:
 if __name__ == "__main__":
     # fake input
     user_query = "對方出示房屋產權、印章，我不確定真假。"
-    fse_hits = [
-        {
-            "title": "出售：偽造房屋權狀出售",
-            "fse_id": "FSE-002",
-            "risk_score": 0.85,
-            "semantic_similarity": 0.91,
-        },
-        {
-            "title": "偽造房屋權狀出售",
-            "fse_id": "FSE-002",
-            "risk_score": 0.48,
-            "semantic_similarity": 0.16,
-        },
-    ]
+    # fse_hits = [
+    #     {
+    #         "title": "出售：偽造房屋權狀出售",
+    #         "fse_id": "FSE-002",
+    #         "risk_score": 0.85,
+    #         "semantic_similarity": 0.91,
+    #     },
+    #     {
+    #         "title": "偽造房屋權狀出售",
+    #         "fse_id": "FSE-002",
+    #         "risk_score": 0.48,
+    #         "semantic_similarity": 0.16,
+    #     },
+    # ]
+    fse_hits = [{'fse_id': 'FSE-002', 'title': '出售：偽造房屋權狀出售', 'word_similarity': 0.0, 'semantic_similarity': 0.073, 'rule_score': 0.7, 'risk_score': 0.177}, {'fse_id': 'FSE-001', 'title': '租金：假房東收取大額訂金', 'word_similarity': 0.0, 'semantic_similarity': 0.066, 'rule_score': 0.65, 'risk_score': 0.163}, {'fse_id': 'FSE-003', 'title': '貸款：貸款代辦先收手續費後失聯', 'word_similarity': 0.0, 'semantic_similarity': 0.087, 'rule_score': 0.6, 'risk_score': 0.163}]
     agent = consultant_agent()
     report = agent.consult(user_query, fse_hits)
     print("\n🔍 AI 防詐騙專家報告：\n")

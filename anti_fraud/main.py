@@ -5,7 +5,7 @@ from similarity.rule_engine import RuleEngineAgent
 from similarity.fusion_score import FusionScoringAgent
 from agent.consultant_agent import consultant_agent          # ★ 新增：匯入 consult
 
-DATA_PATH = "fse.json"
+DATA_PATH = "anti_fraud/fse.json"
 embedder = EmbeddingAgent()
 registry = ScriptRegistry(DATA_PATH, embedder)
 rule_engine = RuleEngineAgent()
@@ -29,10 +29,12 @@ def ask():
     # -------- 計算最相似 FSE --------
     struct = UserQueryService.normalize(payload)
     top_hits = fusion_agent.evaluate(desc, struct, top_k=3)
+    print(top_hits)
     """ test
     1. 我看房前先匯錢過去給房東，後來他就沒下落了，我是不是被詐騙了呢？
     """
-    report = consultant_agent.consult(desc, top_hits)          
+    agent = consultant_agent()
+    report = agent.consult(desc, top_hits)          
     print(report)
     # print("\n📊 推薦結果 (RiskScore↑)：")
     # for i, hit in enumerate(top_hits, 1):
