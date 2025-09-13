@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore", message="The parameter 'token_pattern' will no
 
 import os 
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = ""
 
 class EmbeddingAgent:
     """使用 OpenAIEmbeddings 替代 sentence-transformers"""
