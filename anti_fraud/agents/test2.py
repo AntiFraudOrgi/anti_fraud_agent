@@ -19,8 +19,7 @@ from pydantic import BaseModel
 
 # 0‑1 threshold over which we warn the user. Adjust empirically.
 FRAUD_THRESHOLD: float = 0.42
-os.environ["OPENAI_API_KEY"] = "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"
-
+os.environ["OPENAI_API_KEY"] = ""
 # We hard‑code a tiny demo library of “FVE” fraud scripts.
 # In production these could come from a database or remote store.
 FRAUD_SCRIPTS_RAW: List[dict[str, str]] = [
